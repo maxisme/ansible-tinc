@@ -59,7 +59,7 @@
     - restart tinc
 
 - name: ensure tinc hosts file binds to physical ip address
-  when: hostvars[inventory_hostname].ansible_connection != "local"
+  when: hostvars[inventory_hostname].ansible_connection and hostvars[inventory_hostname].ansible_connection != "local"
   lineinfile: >
     dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
     line="Address = {{ hostvars[inventory_hostname].ansible_host }}"
