@@ -92,7 +92,7 @@ For example, if we wanted to remove **node04**, the `/hosts` file would look lik
 ```
 [label /hosts — remove node04 from VPN]
 [vpn]
-node01 vpn_ip=10.0.0.1 ansible_host=192.0.2.55
+node01 vpn_ip=10.0.0.1 advertise_tinc=true ansible_host=192.0.2.55
 node02 vpn_ip=10.0.0.2 ansible_host=192.0.2.240
 node03 vpn_ip=10.0.0.3 ansible_host=198.51.100.4
 
