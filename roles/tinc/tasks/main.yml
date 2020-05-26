@@ -11,6 +11,11 @@
     name=tinc
     state=latest
 
+- name: install rsync
+  package: >
+    name=rsync
+    state=latest
+
 - name: create tinc systemd service file (redhat)
   template: >
     src=tinc.service.j2
