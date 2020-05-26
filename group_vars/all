@@ -1,6 +1,6 @@
 ---
 
-netname: nyc3
+netname: swarm
 
 vpn_interface: tun0
 

@@ -119,7 +119,7 @@
 
 - name: ensure tinc is started
   service: >
-    name=tinc
+    name=tinc@{{ netname }}
     use=service
     enabled=yes
     state=started
