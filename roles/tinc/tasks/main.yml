@@ -120,6 +120,7 @@
 - name: ensure tinc is started
   service: >
     name=tinc
+    use=service
     enabled=yes
     state=started
     pattern=tincd -n {{ netname }}

@@ -40,7 +40,7 @@ The first line, `[vpn]`, specifies that the host entries directly below it are p
 
 The `/group_vars/all` file contains a few values that you may want to modify.
 
-- `netname` specifies the tinc netname. It's set to `nyc3` by default.
+- `netname` specifies the tinc netname.
 - `vpn_netmask` specifies the netmask that the will be applied to the VPN interface. By default, it's set to `255.255.255.0`, which means that each `vpn_ip` is a Class C address which can only communicate with other hosts within the same subnet. For example, a `10.0.0.x` will not be able to communicate with a `10.0.1.x` host unless the subnet is enlarged by changing `vpn_netmask` to something like `255.255.0.0`.
 
 The other variables probably don't need to be modified.
