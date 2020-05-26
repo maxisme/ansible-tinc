@@ -119,11 +119,17 @@
 
 - name: ensure tinc is started
   service: >
+    name=tinc
+    use=service
+    enabled=yes
+    state=started
+
+- name: ensure tinc network is started
+  service: >
     name=tinc@{{ netname }}
     use=service
     enabled=yes
     state=started
-    pattern=tincd -n {{ netname }}
 
 - name: add nodes to /etc/hosts (ansible_inventory resolves to vpn_ip)
   lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].vpn_ip }} {{item}}" state=present
