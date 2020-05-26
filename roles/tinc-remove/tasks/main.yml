@@ -3,6 +3,7 @@
 - name: stop and disable tinc
   service: >
     name=tinc
+    use=service
     enabled=no
     state=stopped
     pattern=tincd -n {{ netname }}
