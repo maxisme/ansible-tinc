@@ -63,24 +63,6 @@
   notify:
     - restart tinc
 
-- name: ensure Cipher is off
-  lineinfile: >
-    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
-    line="Cipher = none"
-    insertbefore="BOF"
-    create=yes
-  notify:
-    - restart tinc
-
-- name: ensure Digest is off
-  lineinfile: >
-    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
-    line="Digest = none"
-    insertbefore="BOF"
-    create=yes
-  notify:
-    - restart tinc
-
 - name: ensure tinc hosts file binds to physical ip address
   when: hostvars[inventory_hostname].advertise_tinc is defined
   lineinfile: >
