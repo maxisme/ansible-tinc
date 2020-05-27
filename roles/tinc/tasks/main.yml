@@ -80,6 +80,22 @@
   notify:
     - restart tinc
 
+- name: ensure Cipher is off
+  lineinfile: >
+    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
+    line="Cipher = none"
+    create=yes
+  notify:
+    - restart tinc
+
+- name: ensure Digest is off
+  lineinfile: >
+    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
+    line="Digest = none"
+    create=yes
+  notify:
+    - restart tinc
+
 - name: check whether /etc/tinc/netname/hosts/inventory_hostname contains "-----END RSA PUBLIC KEY-----"
   command: awk '/^-----END RSA PUBLIC KEY-----$/'  /etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
   changed_when: "public_key.stdout != '-----END RSA PUBLIC KEY-----'"
