@@ -63,27 +63,11 @@
   notify:
     - restart tinc
 
-- name: ensure tinc hosts file binds to physical ip address
-  when: hostvars[inventory_hostname].advertise_tinc is defined
-  lineinfile: >
-    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
-    line="Address = {{ hostvars[inventory_hostname].ansible_host }}"
-    create=yes
-  notify:
-    - restart tinc
-
-- name: ensure subnet ip address is properly set in tinc host file
-  lineinfile: >
-    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
-    line="Subnet = {{ vpn_ip }}/{{ vpn_subnet_cidr_netmask }}"
-    create=yes
-  notify:
-    - restart tinc
-
 - name: ensure Cipher is off
   lineinfile: >
     dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
     line="Cipher = none"
+    insertbefore="BOF"
     create=yes
   notify:
     - restart tinc
@@ -92,6 +76,26 @@
   lineinfile: >
     dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
     line="Digest = none"
+    insertbefore="BOF"
+    create=yes
+  notify:
+    - restart tinc
+
+- name: ensure tinc hosts file binds to physical ip address
+  when: hostvars[inventory_hostname].advertise_tinc is defined
+  lineinfile: >
+    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
+    line="Address = {{ hostvars[inventory_hostname].ansible_host }}"
+    insertbefore="BOF"
+    create=yes
+  notify:
+    - restart tinc
+
+- name: ensure subnet ip address is properly set in tinc host file
+  lineinfile: >
+    dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
+    line="Subnet = {{ vpn_ip }}/{{ vpn_subnet_cidr_netmask }}"
+    insertbefore="BOF"
     create=yes
   notify:
     - restart tinc
